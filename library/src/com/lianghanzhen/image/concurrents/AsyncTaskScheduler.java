@@ -3,7 +3,7 @@ package com.lianghanzhen.image.concurrents;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import com.lianghanzhen.image.L;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -192,7 +192,7 @@ public class AsyncTaskScheduler<P, R, T extends AsyncTask<P, R>> {
                 R result = mAsyncTask.doAsyncTask(mParams);
                 mInternalHandler.obtainMessage(WHAT_SUCCESS, new AsyncTaskResult<P, R>(mParams, result)).sendToTarget();
             } catch (Throwable error) {
-                Log.w(TAG, error.getMessage(), error);
+                L.e(error.getMessage(), error);
                 mInternalHandler.obtainMessage(WHAT_ERROR, new AsyncTaskError<P>(mParams, error)).sendToTarget();
             }
         }
