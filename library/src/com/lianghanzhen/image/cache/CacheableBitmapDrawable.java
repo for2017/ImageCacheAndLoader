@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Looper;
-import com.lianghanzhen.image.L;
+import com.lianghanzhen.image.utils.L;
 
 import java.lang.ref.WeakReference;
 

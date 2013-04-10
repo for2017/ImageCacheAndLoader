@@ -1,4 +1,4 @@
-package com.lianghanzhen.image;
+package com.lianghanzhen.image.utils;
 
 
 import android.util.Log;

@@ -4,7 +4,9 @@
       <root url="file://$PROJECT_DIR$/library/libs" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/disklrucache-1.3.1-sources.jar!/" />
+    </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/library/libs" recursive="false" />
   </library>
 </component>

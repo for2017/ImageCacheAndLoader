@@ -3,7 +3,7 @@ package com.lianghanzhen.image.concurrents;
 
 import android.os.Handler;
 import android.os.Message;
-import com.lianghanzhen.image.L;
+import com.lianghanzhen.image.utils.L;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -70,6 +70,27 @@ public class AsyncTaskScheduler<P, R, T extends AsyncTask<P, R>> {
         } else {
             mWaitingTasks.add(params);
         }
+    }
+
+    public void removeTask(P params) {
+        mWaitingTasks.remove(params);
+    }
+
+    public void shutdown() {
+        mRunningTasks.clear();
+        mWaitingTasks.clear();
+        mAsyncTaskListeners.clear();
+        mFixedExecutorService.shutdown();
+    }
+
+    public void registerListener(AsyncTaskListener<P, R> listener) {
+        if (listener != null && !mAsyncTaskListeners.contains(listener)) {
+            mAsyncTaskListeners.add(listener);
+        }
+    }
+
+    public void unregisterListener(AsyncTaskListener<P, R> listener) {
+        mAsyncTaskListeners.remove(listener);
     }
 
     private void startAsyncTask(P params) {
