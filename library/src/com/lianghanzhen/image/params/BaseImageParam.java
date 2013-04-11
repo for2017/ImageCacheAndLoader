@@ -2,23 +2,23 @@ package com.lianghanzhen.image.params;
 
 public abstract class BaseImageParam {
 	
-	private boolean enableMemCache = true;
-	private boolean enableDiskCache = true;
+	private boolean mEnableMemCache = true;
+	private boolean mEnableDiskCache = true;
 	
 	public boolean isEnableMemCache() {
-		return enableMemCache;
+		return mEnableMemCache;
 	}
 
 	public void setEnableMemCache(boolean enableMemCache) {
-		this.enableMemCache = enableMemCache;
+		mEnableMemCache = enableMemCache;
 	}
 
 	public boolean isEnableDiskCache() {
-		return enableDiskCache;
+		return mEnableDiskCache;
 	}
 
 	public void setEnableDiskCache(boolean enableDiskCache) {
-		this.enableDiskCache = enableDiskCache;
+		mEnableDiskCache = enableDiskCache;
 	}
 
 	public abstract String getUrl();

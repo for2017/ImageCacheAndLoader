@@ -1,29 +1,28 @@
 package com.lianghanzhen.image.params;
 
-import com.lianghanzhen.image.utils.CacheKeyUtils;
 import com.lianghanzhen.image.utils.ImageSize;
 
 public class NetworkImageParam extends BaseImageParam {
-	private final String url;
-	private final ImageSize imageSize;
+	private final String mUrl;
+	private final ImageSize mImageSize;
 	
 	public NetworkImageParam(String url, ImageSize imageSize) {
-		this.url = url;
-		this.imageSize = imageSize;
+		mUrl = url;
+		mImageSize = imageSize;
 	}
 
     @Override
 	public String getUrl() {
-		return url;
+		return mUrl;
 	}
 	
 	public ImageSize getImageSize() {
-		return imageSize;
+		return mImageSize;
 	}
 	
 	@Override
 	public int hashCode() {
-		return (url == null ? 31 : url.hashCode()) + (imageSize == null ? 32 : imageSize.hashCode());
+		return (mUrl == null ? 31 : mUrl.hashCode()) + (mImageSize == null ? 32 : mImageSize.hashCode());
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class NetworkImageParam extends BaseImageParam {
 		if (o == null || !(o instanceof NetworkImageParam))
 			return false;
 		NetworkImageParam other = (NetworkImageParam) o;
-		return url.equals(other.url) && (imageSize != null ? imageSize.equals(other.imageSize) : other.imageSize == null);
+		return mUrl.equals(other.mUrl) && (mImageSize != null ? mImageSize.equals(other.mImageSize) : other.mImageSize == null);
 	}
 
 }

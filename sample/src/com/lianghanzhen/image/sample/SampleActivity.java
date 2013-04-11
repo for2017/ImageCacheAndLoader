@@ -25,7 +25,8 @@ public class SampleActivity extends Activity {
 
     private static class SampleAdapter extends BaseAdapter {
 
-        private static final String[] URLS = {"http://24.media.tumblr.com/tumblr_liivjs579l1qeqteyo1_500.jpg",
+        private static final String[] URLS = {
+                "http://24.media.tumblr.com/tumblr_liivjs579l1qeqteyo1_500.jpg",
                 "http://29.media.tumblr.com/tumblr_lieuvuig5Y1qze17ho1_500.jpg",
                 "http://24.media.tumblr.com/tumblr_liwoeqmXH31qh9umso1_500.jpg",
                 "http://29.media.tumblr.com/tumblr_lsm50jkqpy1qzhmgco1_500.jpg",
@@ -74,7 +75,6 @@ public class SampleActivity extends Activity {
                 "http://25.media.tumblr.com/tumblr_mcqpch4QbC1qb08qmo1_500.jpg",
                 "http://27.media.tumblr.com/tumblr_ljlpu7iX2U1qzgqodo1_500.jpg",
                 "http://24.media.tumblr.com/tumblr_lu7ep6O5hr1qbjvpuo1_500.jpg",
-                "http://ilovepugs.tumblr.com/post/12403103214/pugs-kylielovestrees-img-7905-jpg",
                 "http://30.media.tumblr.com/tumblr_lj53czBbvd1qzgqodo1_500.jpg",
                 "http://25.media.tumblr.com/tumblr_lruas6Ru8M1r2brlzo1_500.jpg",
                 "http://26.media.tumblr.com/tumblr_lihpotlmBi1qgdpfco1_500.jpg",
@@ -92,7 +92,6 @@ public class SampleActivity extends Activity {
                 "http://28.media.tumblr.com/tumblr_lk8sapJ13n1qhb62wo1_500.jpg",
                 "http://25.media.tumblr.com/tumblr_lsigg3D23h1qz9wudo1_500.jpg",
                 "http://29.media.tumblr.com/tumblr_lu7ep6O5hr1qbjvpuo1_500.jpg",
-                "http://ilovepugs.tumblr.com/post/12403103214/pugs-kylielovestrees-img-7905-jpg",
                 "http://29.media.tumblr.com/tumblr_lu81luxaZA1qb08qmo1_500.jpg",
                 "http://24.media.tumblr.com/tumblr_lhowz2fAnC1qaa50yo1_500.jpg",
                 "http://27.media.tumblr.com/tumblr_ltjgdeZFDz1r0cn4to1_500.png",
@@ -138,10 +137,11 @@ public class SampleActivity extends Activity {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
-            final ImageLoader.CacheStatus fromCache = SampleApplication.getImageLoader().fetchImage((CacheableImageView) viewHolder.imageView, (String) getItem(position));
+            final ImageLoader.CacheStatus fromCache = SampleApplication.getImageLoader().loadImage((CacheableImageView) viewHolder.imageView, (String) getItem(position));
 
             switch (fromCache) {
                 case NONE:
+                    viewHolder.statusView.setTextColor(Color.BLACK);
                     viewHolder.statusView.setText("Loading...");
                     viewHolder.statusView.setBackgroundColor(Color.WHITE);
                     break;

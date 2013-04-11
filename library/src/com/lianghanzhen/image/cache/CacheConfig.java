@@ -7,81 +7,81 @@ import android.graphics.Bitmap.Config;
 import com.lianghanzhen.image.utils.ImageSize;
 
 public class CacheConfig {
-	public final Context context;
-	public final ImageSize maxImageSize;
-	public final BitmapMemoryLruCache memCache;
-	public final BitmapDiskLruCache diskCache;
-	public final CompressFormat compressFormat;
-	public final int compressQuality;
-	public final Bitmap.Config colorConfig;
+	public final Context mContext;
+	public final ImageSize mMaxImageSize;
+	public final BitmapMemoryLruCache mMemCache;
+	public final BitmapDiskLruCache mDiskCache;
+	public final CompressFormat mCompressFormat;
+	public final int mCompressQuality;
+	public final Bitmap.Config mColorConfig;
 
 	private CacheConfig(final Context context, final Builder builder) {
-		this.context = context;
-		maxImageSize = builder.maxImageSize;
-		memCache = builder.memCache;
-		diskCache = builder.diskCache;
-		compressFormat = builder.compressFormat;
-		compressQuality = builder.compressQuality;
-		colorConfig = builder.colorConfig;
+		mContext = context;
+		mMaxImageSize = builder.mMaxImageSize;
+		mMemCache = builder.mMemCache;
+		mDiskCache = builder.mDiskCache;
+		mCompressFormat = builder.mCompressFormat;
+		mCompressQuality = builder.mCompressQuality;
+		mColorConfig = builder.mColorConfig;
 	}
 
 	public static class Builder {
-		private ImageSize maxImageSize = new ImageSize(0, 0);
-		private BitmapMemoryLruCache memCache;
-		private int memCacheMaxSize = 5 * 1024 * 1024;
-		private BitmapDiskLruCache diskCache;
-		private int diskCacheMaxSize = 20 * 1024 * 1024;
-		private CompressFormat compressFormat = CompressFormat.PNG;
-		private int compressQuality = 100;
-		private Bitmap.Config colorConfig = Config.RGB_565;
+		private ImageSize mMaxImageSize = new ImageSize(0, 0);
+		private BitmapMemoryLruCache mMemCache;
+		private int mMemCacheMaxSize = 5 * 1024 * 1024;
+		private BitmapDiskLruCache mDiskCache;
+		private int mDiskCacheMaxSize = 20 * 1024 * 1024;
+		private CompressFormat mCompressFormat = CompressFormat.PNG;
+		private int mCompressQuality = 100;
+		private Bitmap.Config mColorConfig = Config.RGB_565;
 
 		public CacheConfig build(Context context) {
-			if (memCache == null)
-				memCache = new BitmapMemoryLruCache(memCacheMaxSize);
-			if (diskCache == null)
-				diskCache = new BitmapDiskLruCache(context, diskCacheMaxSize);
-            diskCache.setCompressFormat(compressFormat);
-            diskCache.setCompressQuality(compressQuality);
+			if (mMemCache == null)
+				mMemCache = new BitmapMemoryLruCache(mMemCacheMaxSize);
+			if (mDiskCache == null)
+				mDiskCache = new BitmapDiskLruCache(context, mDiskCacheMaxSize);
+            mDiskCache.setCompressFormat(mCompressFormat);
+            mDiskCache.setCompressQuality(mCompressQuality);
 			return new CacheConfig(context, this);
 		}
 
 		public Builder maxImageSize(ImageSize size) {
-			this.maxImageSize = size;
+			mMaxImageSize = size;
 			return this;
 		}
 
 		public Builder memCache(BitmapMemoryLruCache memCache) {
-			this.memCache = memCache;
+			this.mMemCache = memCache;
 			return this;
 		}
 
 		public Builder memCacheMaxSize(int size) {
-			this.memCacheMaxSize = size;
+			mMemCacheMaxSize = size;
 			return this;
 		}
 
 		public Builder diskCache(BitmapDiskLruCache diskCache) {
-			this.diskCache = diskCache;
+			mDiskCache = diskCache;
 			return this;
 		}
 
 		public Builder diskCacheMaxSize(int size) {
-			this.diskCacheMaxSize = size;
+			mDiskCacheMaxSize = size;
 			return this;
 		}
 
 		public Builder compressFormat(CompressFormat format) {
-			this.compressFormat = format;
+			mCompressFormat = format;
 			return this;
 		}
 
 		public Builder compressQuality(int quality) {
-			this.compressQuality = quality;
+			mCompressQuality = quality;
 			return this;
 		}
 
 		public Builder colorConfig(Bitmap.Config config) {
-			this.colorConfig = config;
+			mColorConfig = config;
 			return this;
 		}
 		

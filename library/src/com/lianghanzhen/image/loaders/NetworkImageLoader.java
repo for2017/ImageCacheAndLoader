@@ -20,12 +20,12 @@ public class NetworkImageLoader extends ImageLoader<NetworkImageParam> {
         this(cacheConfig, false);
     }
 
-	public CacheStatus fetchImage(CacheableImageView imageView, String url, boolean autoCalculateSize, int placeholderResId) {
-		return fetchImage(imageView, new NetworkImageParam(url, autoCalculateSize ? ImageSize.calculate(imageView, config.maxImageSize) : ImageSize.ZERO), placeholderResId);
+	public CacheStatus loadImage(CacheableImageView imageView, String url, boolean autoCalculateSize, int placeholderResId) {
+		return loadImage(imageView, new NetworkImageParam(url, autoCalculateSize ? ImageSize.calculate(imageView, mCacheConfig.mMaxImageSize) : ImageSize.ZERO), placeholderResId);
 	}
 
-    public CacheStatus fetchImage(CacheableImageView imageView, String url) {
-        return fetchImage(imageView, url, true, R.drawable.placeholder);
+    public CacheStatus loadImage(CacheableImageView imageView, String url) {
+        return loadImage(imageView, url, true, R.drawable.placeholder);
     }
 
 }

@@ -2,9 +2,7 @@ package com.lianghanzhen.image.sample;
 
 import android.app.Application;
 import com.lianghanzhen.image.cache.CacheConfig;
-import com.lianghanzhen.image.loaders.ImageLoader;
 import com.lianghanzhen.image.loaders.NetworkImageLoader;
-import com.lianghanzhen.image.params.NetworkImageParam;
 
 
 public class SampleApplication extends Application {

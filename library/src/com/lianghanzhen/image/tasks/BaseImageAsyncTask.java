@@ -18,11 +18,11 @@ public abstract class BaseImageAsyncTask<T extends BaseImageParam> implements As
     @Override
     public CacheableBitmapDrawable doAsyncTask(T params) {
         final String url = params.getUrl();
-        CacheableBitmapDrawable result = mCacheConfig.diskCache.get(url);
+        CacheableBitmapDrawable result = mCacheConfig.mDiskCache.get(url);
         if (result == null) {
             Bitmap bitmap = loadImageFromOtherSource(params);
             if (bitmap != null && params.isEnableDiskCache()) {
-                result = mCacheConfig.diskCache.put(url, bitmap);
+                result = mCacheConfig.mDiskCache.put(url, bitmap);
             }
         }
         return result;

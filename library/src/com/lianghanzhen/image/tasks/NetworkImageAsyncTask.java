@@ -51,7 +51,7 @@ public class NetworkImageAsyncTask extends BaseImageAsyncTask<NetworkImageParam>
                             System.gc();
                             break;
                         case 2:
-                            mCacheConfig.memCache.evictAll();
+                            mCacheConfig.mMemCache.evictAll();
                             System.gc();
                             break;
                         case 3:
@@ -131,7 +131,7 @@ public class NetworkImageAsyncTask extends BaseImageAsyncTask<NetworkImageParam>
         }
 
         options.inDither = false;
-        options.inPreferredConfig = mCacheConfig.colorConfig;
+        options.inPreferredConfig = mCacheConfig.mColorConfig;
         options.inJustDecodeBounds = false;
         return options;
     }
