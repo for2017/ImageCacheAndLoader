@@ -18,7 +18,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ImageFetcher<T extends BaseImageParam> implements AsyncTaskListener<T, CacheableBitmapDrawable> {
+public class ImageLoader<T extends BaseImageParam> implements AsyncTaskListener<T, CacheableBitmapDrawable> {
+
+    public static enum CacheStatus {
+        NONE, DISK, MEMORY;
+    }
+
 	private static final int KEY_ITEM_1 = R.id.image_item1;
 	private static final int KEY_ITEM_2 = R.id.image_item2;
 
@@ -34,7 +39,7 @@ public class ImageFetcher<T extends BaseImageParam> implements AsyncTaskListener
 	/* 延迟加载图片的时间 */
 	private long delay = 100L;
 
-	public ImageFetcher(AsyncTaskScheduler<T, CacheableBitmapDrawable, AsyncTask<T, CacheableBitmapDrawable>> imageLoadManager, CacheConfig config, boolean hideImage) {
+	public ImageLoader(AsyncTaskScheduler<T, CacheableBitmapDrawable, AsyncTask<T, CacheableBitmapDrawable>> imageLoadManager, CacheConfig config, boolean hideImage) {
 		this.imageLoadManager = imageLoadManager;
 		this.imageLoadManager.registerListener(this);
 		this.config = config;
@@ -60,18 +65,18 @@ public class ImageFetcher<T extends BaseImageParam> implements AsyncTaskListener
 		return config.memCache.get(param.getUrl());
 	}
 
-	public void fetchImage(CacheableImageView imageView, T param, int placeholderResId) {
+	public CacheStatus fetchImage(CacheableImageView imageView, T param, int placeholderResId) {
 		if (placeholderResId > 0)
 			imageView.setImageResource(placeholderResId);
 		if (hideImage)
-			return;
+			return CacheStatus.NONE;
 
         cancalFetch(imageView);
 
 		CacheableBitmapDrawable result = fetchImageFromMemCache(param);
 		if (result != null) {
 			displayImage(imageView, result);
-			return;
+			return CacheStatus.MEMORY;
 		}
 
 		ImageItem<T> item = new ImageItem<T>(new WeakReference<CacheableImageView>(imageView), param);
@@ -85,6 +90,7 @@ public class ImageFetcher<T extends BaseImageParam> implements AsyncTaskListener
 		} else {
 			doFetchImage(item);
 		}
+        return CacheStatus.DISK;
 	}
 
 	private void doFetchImage(ImageItem<T> item) {
@@ -158,15 +164,15 @@ public class ImageFetcher<T extends BaseImageParam> implements AsyncTaskListener
 	}
 
 	private static class InternalHandler<T extends BaseImageParam> extends Handler {
-		private final WeakReference<ImageFetcher<T>> ref;
+		private final WeakReference<ImageLoader<T>> ref;
 
-		private InternalHandler(ImageFetcher<T> fetcher) {
-			ref = new WeakReference<ImageFetcher<T>>(fetcher);
+		private InternalHandler(ImageLoader<T> fetcher) {
+			ref = new WeakReference<ImageLoader<T>>(fetcher);
 		}
 
 		@Override
 		public void handleMessage(Message msg) {
-			ImageFetcher<T> fetcher = ref.get();
+			ImageLoader<T> fetcher = ref.get();
 			if (fetcher == null)
 				return;
 			if (msg.what == WHAT_FETCH) {

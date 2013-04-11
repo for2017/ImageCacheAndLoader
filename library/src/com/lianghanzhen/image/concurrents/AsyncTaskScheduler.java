@@ -115,9 +115,7 @@ public class AsyncTaskScheduler<P, R, T extends AsyncTask<P, R>> {
     }
 
     private void scheduleNextAsyncTask() {
-        int runningSize = mRunningTasks.size();
-        int waitingSize = mWaitingTasks.size();
-        while (runningSize < mConcurrents && waitingSize > 0) {
+        while (mRunningTasks.size() < mConcurrents && mWaitingTasks.size() > 0) {
             startAsyncTask(mWaitingTasks.remove(0));
         }
     }
